@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'io.spring.dependency-management' version '1.0.1.RELEASE'
+    id 'net.researchgate.release' version '2.4.0'
+}
+
+sourceCompatibility = 1.8
+group = 'com.uptake.log4j'
+
+// add -SNAPSHOT to build if not a release
+afterEvaluate { project ->
+    project.version = "${project.version}".replace("-SNAPSHOT", "")
+    if (!project.hasProperty('isRelease')) {
+        project.version = "${project.version}-SNAPSHOT"
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.apache.logging.log4j:log4j-bom:2.8.1'
+        mavenBom 'com.fasterxml.jackson:jackson-bom:2.8.7'
+    }
+}
+
+repositories {
+    jcenter()
+    maven { url 'https://jenkins.uptake.com/nexus/content/repositories/releases/' }
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    compile 'org.apache.logging.log4j:log4j-api'
+    compile 'org.apache.logging.log4j:log4j-core'
+    compile 'com.fasterxml.jackson.core:jackson-core'
+}
+
+def repo = project.findProperty('isRelease') ? 'releases' : 'snapshots'
+
+publishing {
+    publications {
+        log4jSlack(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "https://jenkins.uptake.com/nexus/content/repositories/${repo}/"
+            credentials {
+                username = System.env['NEXUS_USERNAME']
+                password = System.env['NEXUS_PASSWORD']
+            }
+        }
+    }
+}
