@@ -57,6 +57,8 @@ By using the `SLACK` marker, this allows the configuration to filter all message
 As long as you don't override the additivity property of the relevant loggers, then these log messages will also be logged to the console or file or whatever you have configured normally.
 Read more about markers [here](https://logging.apache.org/log4j/2.x/manual/markers.html).
 
+## Configuration
+
 The following are all the configuration attributes or elements supported:
 
 * name: name of the appender, used when referencing via `<AppenderRef ref="name"/>`.
@@ -67,3 +69,10 @@ The following are all the configuration attributes or elements supported:
   Only `StringLayout` layouts are supported since sending arbitrary binary data to Slack doesn't make sense.
   If no layout is specified, the default pattern layout is used.
 * webhook: URL to the Slack webhook to send messages to.
+
+## Development
+
+This project is managed by me.
+Come to `#msicker` on Slack get help or discuss feature requests or bug fixes.
+If you would like to contribute, fork this project and create a pull request.
+For non-trivial changes, please have a conversation on Slack first.
