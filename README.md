@@ -70,9 +70,7 @@ The following are all the configuration attributes or elements supported:
   If no layout is specified, the default pattern layout is used.
 * webhook: URL to the Slack webhook to send messages to.
 
-## Development
+## Contributing
 
-This project is managed by me.
-Come to `#msicker` on Slack get help or discuss feature requests or bug fixes.
-If you would like to contribute, fork this project and create a pull request.
-For non-trivial changes, please have a conversation on Slack first.
+Submit pull requests to [GitHub](https://github.com/jvz/log4j-slack/pulls).
+Make sure to [sign off your commits](https://developercertificate.org/) using the `-s` or `--signoff` option.
